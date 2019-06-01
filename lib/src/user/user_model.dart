@@ -32,4 +32,10 @@ class UserReference {
   factory UserReference.from(User user) {
     return UserReference(user.id, user.name, user.username, user.email);
   }
+
+  factory UserReference.fromDynamic(dynamic data) {
+    return UserReference(
+      data["userId"], data["name"], data["username"], data["email"],
+    );
+  }
 }
