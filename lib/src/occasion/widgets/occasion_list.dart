@@ -62,17 +62,22 @@ class _OccasionListItem extends StatelessWidget {
                     Text(occasion.title, textScaleFactor: 1.5),
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: Text("Organizer: " + occasion.creator.name, style: TextStyle(color: Colors.grey)),
+                      child: Text("Organizer: " + occasion.creator.name,
+                          style: TextStyle(color: Colors.grey)),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: Text("Event date: " + occasion.getFormattedEventDate()),
+                      child: Text(
+                          "Event date: " + occasion.getFormattedEventDate()),
                     ),
                     Container(
                         padding: const EdgeInsets.all(4.0),
-                        width: 300,
-                        child: Text(occasion.getTrimmedDescription(64))
-                    ),
+                        child: Container(
+                          child: Text(
+                            occasion.getTrimmedDescription(32),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )),
                   ],
                 )
               ],
@@ -98,7 +103,6 @@ class _EmptyView extends StatelessWidget {
 }
 
 class OccasionList extends StatelessWidget {
-
   const OccasionList({Key key}) : super(key: key);
 
   @override
@@ -115,9 +119,9 @@ class OccasionList extends StatelessWidget {
         }
         final data = snapshot.data;
         return ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, idx) => _OccasionListItem(occasion: data[idx])
-        );
+            itemCount: data.length,
+            itemBuilder: (context, idx) =>
+                _OccasionListItem(occasion: data[idx]));
       },
     );
   }
