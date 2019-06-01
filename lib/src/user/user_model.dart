@@ -1,7 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class User extends Equatable {
+class User extends Equatable {}
+
+class AnonymousUser extends User {}
+
+class LoggedInUser extends User {
   final String id;
   final String email;
   String name;
@@ -9,10 +14,13 @@ class User extends Equatable {
   String phone;
   Address address;
 
-  User(this.id, this.email);
+  LoggedInUser(this.id, this.email);
 
-  factory User.fromSnapshotDocument(DocumentSnapshot document) {
-    return User(document.documentID, document.data["email"]);
+  factory LoggedInUser.fromFirebaseUser(FirebaseUser user) {
+    return LoggedInUser(user.uid, user.email);
+  }
+  factory LoggedInUser.fromSnapshotDocument(DocumentSnapshot document) {
+    return LoggedInUser(document.documentID, document.data["email"]);
   }
 }
 
@@ -29,7 +37,7 @@ class UserReference {
 
   UserReference(this.userId, this.name, this.username, this.email);
 
-  factory UserReference.from(User user) {
+  factory UserReference.from(LoggedInUser user) {
     return UserReference(user.id, user.name, user.username, user.email);
   }
 
@@ -39,3 +47,5 @@ class UserReference {
     );
   }
 }
+
+

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hack19/src/occasion_list.dart';
+import 'package:hack19/src/occasion/widgets/occasion_list.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);

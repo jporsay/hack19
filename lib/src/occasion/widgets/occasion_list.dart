@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hack19/src/occasion/occasion_model.dart';
 import 'package:hack19/src/occasion/occasion_repository.dart';
+import 'package:hack19/src/page/occasion_details_page.dart';
 import 'package:provider/provider.dart';
 
 class _SnapshotError extends StatelessWidget {
@@ -13,6 +14,41 @@ class _SnapshotError extends StatelessWidget {
     return Container(
       child: Center(
         child: Text("Error loading events"),
+      ),
+    );
+  }
+}
+
+class _OccasionListItem extends StatelessWidget {
+  final Occasion occasion;
+  const _OccasionListItem({
+    Key key,
+    @required this.occasion,
+  }) : super(key: key);
+
+  _navigateToDetails(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => OccasionDetailPage(occasion: occasion),
+      settings: RouteSettings(name: "Details: ${occasion.title}"),
+    ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: InkWell(
+        onTap: () => _navigateToDetails(context),
+        child: Row(
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(occasion.title),
+                Text(occasion.tags.map((t) => t.label).join(', '))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -49,27 +85,11 @@ class OccasionList extends StatelessWidget {
         final data = snapshot.data;
         return ListView.builder(
           itemCount: data.length,
-          itemBuilder: (context, idx) => OccasionWidget(occasion: data[idx]),
+          itemBuilder: (context, idx) => _OccasionListItem(
+                occasion: data[idx],
+              ),
         );
       },
-    );
-  }
-}
-
-class OccasionWidget extends StatelessWidget {
-  final Occasion occasion;
-
-  const OccasionWidget({Key key, @required this.occasion}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Row(
-          children: <Widget>[Text(occasion.title)],
-        ),
-      ),
     );
   }
 }
