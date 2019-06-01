@@ -43,7 +43,7 @@ class OccasionList extends StatelessWidget {
         if (snapshot.hasError) {
           return _SnapshotError();
         }
-        if (!snapshot.hasData) {
+        if (!snapshot.hasData || snapshot.data.isEmpty) {
           return _EmptyView();
         }
         final data = snapshot.data;
