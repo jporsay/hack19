@@ -25,10 +25,11 @@ class UserReference {
   final String userId;
   final String username;
   final String email;
+  final String name;
 
-  UserReference(this.userId, this.username, this.email);
+  UserReference(this.userId, this.name, this.username, this.email);
 
   factory UserReference.from(User user) {
-    return UserReference(user.id, user.username, user.email);
+    return UserReference(user.id, user.name, user.username, user.email);
   }
 }

@@ -62,12 +62,20 @@ class Occasion extends Equatable {
     model.title = document.data["title"];
     model.creator = UserReference(
         document.data["creator"]["userId"].toString(),
-        document.data["creator"]["email"].toString(),
-        document.data["creator"]["username"].toString()
+        document.data["creator"]["name"].toString(),
+        document.data["creator"]["username"].toString(),
+        document.data["creator"]["email"].toString()
     );
     model.description = document.data["description"];
     model.maxAssistantsCount = document.data["maxAssistantsCount"];
-    model.status = document.data["status"];
+    model.status = OccasionStatus.values.firstWhere(
+        (e) => e.toString() == "OccasionStatus." + document.data["status"], orElse: () => null
+    );
+    List<dynamic> tagsData = document.data["tags"];
+    model.tags = tagsData.map((data) => Tag(data["id"], data["label"])).toList();
+    model.creationDate = document.data["creationDate"].toDate();
+    model.requirementsDate = document.data["requirementsDate"].toDate();
+    model.occasionDate = document.data["occasionDate"].toDate();
     return model;
   }
 
@@ -82,6 +90,7 @@ class Occasion extends Equatable {
 
 class OccasionRequirement {
   String text;
+  String description;
   List<UserReference> fulfillers = [];
   UserReference confirmedFulfiller;
 }
@@ -89,4 +98,7 @@ class OccasionRequirement {
 class Tag {
   String id;
   String label;
+
+  Tag(this.id, this.label);
+
 }
