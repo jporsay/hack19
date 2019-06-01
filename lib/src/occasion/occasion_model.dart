@@ -96,6 +96,19 @@ class Occasion extends Equatable {
     return (maxAssistantsCount - confirmedAssistants.length).toString();
   }
 
+  String getTrimmedDescription(int maxChars) {
+    if (description.length <= maxChars) {
+      return description;
+    }
+    return description.substring(0, maxChars) + "…";
+  }
+
+  String getFormattedEventDate() {
+    return creationDate.day.toString()
+        + "/" + creationDate.month.toString()
+        + "/" + creationDate.year.toString();
+  }
+
 }
 
 class OccasionRequirement {

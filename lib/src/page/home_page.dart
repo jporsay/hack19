@@ -11,7 +11,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: OccasionList(),
+      appBar: AppBar(
+        title: Text("Events near you"),
+      ),
+      backgroundColor: Color(0xFFd3d3d3),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 0),
+        child: OccasionList(),
+      ),
     );
   }
 }

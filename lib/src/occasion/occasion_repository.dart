@@ -14,8 +14,18 @@ class OccasionRepository {
   }
 
   List<Occasion> _mapSnapshotToOccasionList(QuerySnapshot snapshot) {
-    return snapshot.documents
+    List<Occasion> list = snapshot.documents
         .map((document) => Occasion.fromSnapshotDocument(document))
         .toList();
+    list.add(list.first);
+    list.add(list.first);
+    list.add(list.first);
+    list.add(list.first);
+    list.add(list.first);
+    list.add(list.first);
+    list.add(list.first);
+    list.add(list.first);
+    list.add(list.first);
+    return list;
   }
 }

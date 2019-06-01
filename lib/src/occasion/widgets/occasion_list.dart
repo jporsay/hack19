@@ -35,19 +35,49 @@ class _OccasionListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: InkWell(
-        onTap: () => _navigateToDetails(context),
-        child: Row(
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          color: Colors.white70,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+            onTap: () => _navigateToDetails(context),
+            child: Row(
               children: <Widget>[
-                Text(occasion.title),
-                Text(occasion.tags.map((t) => t.label).join(', '))
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network(
+                    occasion.iconPhoto,
+                    width: 50,
+                    height: 50,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(occasion.title, textScaleFactor: 1.5),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text("Organizer: " + occasion.creator.name, style: TextStyle(color: Colors.grey)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text("Event date: " + occasion.getFormattedEventDate()),
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(4.0),
+                        width: 300,
+                        child: Text(occasion.getTrimmedDescription(64))
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
@@ -68,6 +98,7 @@ class _EmptyView extends StatelessWidget {
 }
 
 class OccasionList extends StatelessWidget {
+
   const OccasionList({Key key}) : super(key: key);
 
   @override
@@ -85,9 +116,7 @@ class OccasionList extends StatelessWidget {
         final data = snapshot.data;
         return ListView.builder(
           itemCount: data.length,
-          itemBuilder: (context, idx) => _OccasionListItem(
-                occasion: data[idx],
-              ),
+          itemBuilder: (context, idx) => _OccasionListItem(occasion: data[idx])
         );
       },
     );
