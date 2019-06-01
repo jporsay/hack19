@@ -9,7 +9,6 @@ class OccasionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(occasion.occasionDate);
     return Container(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -19,7 +18,10 @@ class OccasionWidget extends StatelessWidget {
             children: <Widget>[
               Icon(Icons.calendar_today, color: Colors.grey,),
               Padding(padding: EdgeInsets.only(left: 5),),
-              Text(occasion.occasionDate.toString(), style: TextStyle(color: Colors.grey),),
+              Text(
+                "${occasion.occasionDate.day}/${occasion.occasionDate.month}/${occasion.occasionDate.year}",
+                style: TextStyle(color: Colors.grey),
+              ),
             ],
           ),
           Text(occasion.title, style: TextStyle(fontSize: 30),),
@@ -52,7 +54,10 @@ class OccasionWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text("Event details", style: TextStyle(fontSize: 25),),
-              Text(occasion.description)
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Text(occasion.description, style: TextStyle(color: Colors.black54),)
+              )
             ],
           ),
           Divider(),
@@ -79,20 +84,29 @@ class RequirementWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: <Widget>[
-        Text(requirement.title, style: TextStyle(fontSize: 20),),
-        Container(
-          padding: EdgeInsets.only(left: 20),
-          child: Column(
-            children: <Widget>[
-              requirement.confirmedFulfiller != null
-              ? Text("Made possible thanks to: ${requirement.confirmedFulfiller.username}")
-              : Text("")
-            ],
-          ),
-        )
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(requirement.title, style: TextStyle(fontSize: 20),),
+            requirement.confirmedFulfiller != null
+            ? Container(
+              padding: EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(requirement.description, style: TextStyle(fontSize: 16),),
+                  Text(
+                    "Made possible thanks to: ${requirement.confirmedFulfiller.username}",
+                    style: TextStyle(color: Colors.blueGrey),
+                  ),
+                ],
+              ),
+            )
+            : Text("")
+          ],
+        ),
       ],
     );
   }
