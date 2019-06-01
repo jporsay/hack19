@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hack19/src/authentication/authentication_provider.dart';
-import 'package:hack19/src/page/home_page.dart';
+import 'package:hack19/src/authentication/authentication_repository.dart';
 import 'package:provider/provider.dart';
 
 const _whiteColor = Colors.white70;
@@ -86,18 +85,14 @@ class _LoginPageState extends State<LoginPage> {
   String _error;
 
   _doGoogleLogin(BuildContext context) async {
-    final authProvider = Provider.of<AuthenticationProvider>(context);
+    final authProvider = Provider.of<AuthenticationRepository>(context);
     final success = await authProvider.googleSignIn();
     if (!success) {
       setState(() {
         _error = "There was a problem while signing in";
       });
-    }
-    if (success) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => HomePage(),
-        settings: RouteSettings(name: "Home"),
-      ));
+    } else {
+      Navigator.of(context).pop(true);
     }
   }
 
