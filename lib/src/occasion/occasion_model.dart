@@ -59,10 +59,25 @@ class Occasion extends Equatable {
   factory Occasion.fromSnapshotDocument(DocumentSnapshot document) {
     Occasion model = Occasion();
     model.id = document.documentID;
-    model.creator = document.data["creator"];
     model.title = document.data["title"];
+    model.creator = UserReference(
+        document.data["creator"]["userId"].toString(),
+        document.data["creator"]["email"].toString(),
+        document.data["creator"]["username"].toString()
+    );
+    model.description = document.data["description"];
+    model.maxAssistantsCount = document.data["maxAssistantsCount"];
+    model.status = document.data["status"];
     return model;
   }
+
+  factory Occasion.draft(User user, String title) {
+    Occasion model = Occasion();
+    model.creator = UserReference.from(user);
+    model.title = title;
+    return model;
+  }
+
 }
 
 class OccasionRequirement {
