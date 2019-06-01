@@ -138,7 +138,7 @@ class RequirementWidget extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          "Made possible thanks to: ${requirement.confirmedFulfiller.username}",
+                          "Made possible thanks to: ${requirement.confirmedFulfiller.name}",
                           style: TextStyle(color: Colors.blueGrey),
                         ),
                       ],
