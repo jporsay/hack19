@@ -28,7 +28,7 @@ class UserReference {
 
   UserReference(this.userId, this.username, this.email);
 
-  factory UserReference.fromSnapshotDocument(User user) {
+  factory UserReference.from(User user) {
     return UserReference(user.id, user.username, user.email);
   }
 }

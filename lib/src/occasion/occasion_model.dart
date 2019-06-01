@@ -11,13 +11,11 @@ enum OccasionStatus {
   /*
    * Todos los datos estan confirmados y falta que otros usuarios se ofrezcan para cumplir los requerimientos
    */
-
   PENDING_FULFILLERS,
 
   /*
    * Todos los requerimientos estan confirmados.
    */
-
   PENDING_CONFIRMATION,
 
   /*
@@ -32,12 +30,12 @@ enum OccasionStatus {
 }
 
 class Occasion extends Equatable {
-  final String id;
+  String id;
   UserReference creator;
   DateTime creationDate;
   String title;
   String description;
-  List<Tag> tags;
+  List<Tag> tags = [];
   DateTime occasionDate;
   DateTime requirementsDate;
   int maxAssistantsCount;
@@ -46,12 +44,23 @@ class Occasion extends Equatable {
   List<UserReference> assistantsWaitingList = [];
   OccasionStatus status = OccasionStatus.DRAFT;
 
-  Occasion(this.id, this.title);
+  Occasion({
+    this.id,
+    this.creator,
+    this.creationDate,
+    this.title,
+    this.description,
+    this.occasionDate,
+    this.requirementsDate,
+    this.maxAssistantsCount,
+    this.status
+  });
 
   factory Occasion.fromSnapshotDocument(DocumentSnapshot document) {
-    Occasion model = Occasion(
-        document.documentID, document.data["title"]
-    );
+    Occasion model = Occasion();
+    model.id = document.documentID;
+    model.creator = document.data["creator"];
+    model.title = document.data["title"];
     return model;
   }
 }
