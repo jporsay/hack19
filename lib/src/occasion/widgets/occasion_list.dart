@@ -3,6 +3,8 @@ import 'package:hack19/src/occasion/occasion_model.dart';
 import 'package:hack19/src/occasion/occasion_repository.dart';
 import 'package:provider/provider.dart';
 
+import 'package:hack19/src/occasion/widgets/occasion_widget.dart';
+
 class _SnapshotError extends StatelessWidget {
   final AsyncSnapshot<List<Occasion>> snapshot;
 
@@ -52,24 +54,6 @@ class OccasionList extends StatelessWidget {
           itemBuilder: (context, idx) => OccasionWidget(occasion: data[idx]),
         );
       },
-    );
-  }
-}
-
-class OccasionWidget extends StatelessWidget {
-  final Occasion occasion;
-
-  const OccasionWidget({Key key, @required this.occasion}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: Row(
-          children: <Widget>[Text(occasion.title)],
-        ),
-      ),
     );
   }
 }

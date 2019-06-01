@@ -86,6 +86,10 @@ class Occasion extends Equatable {
     return model;
   }
 
+  String getSpotsLeft() {
+    return (maxAssistantsCount - confirmedAssistants.length).toString();
+  }
+
 }
 
 class OccasionRequirement {
