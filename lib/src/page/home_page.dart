@@ -43,11 +43,31 @@ class CreateEventPage extends StatefulWidget {
 
 class CreateEventPageState extends State<CreateEventPage> {
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Create event")
+      ),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Text('Please enter the title'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(),
+            ),
+            RaisedButton(
+              child : Text('Guardar'),
+              onPressed: () {
+                Navigator.pop(context);
+              }
+            )
+          ],
+        )
       ),
     );
   }
