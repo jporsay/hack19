@@ -17,7 +17,11 @@ samples, guidance on mobile development, and a full API reference.
 
 La idea es hacer un servicio que permite organizar eventos relacionados con la comunidad Flutter. El servicio se va a presentar como una aplicacion hecha en Flutter.
 
-## Requirements
+## Screenshots
+
+See the [screenshots](https://github.com/jporsay/hack19/tree/master/screenshots) directory.
+
+## Specifications
 
 La app consiste principalmente de dos partes:
 
