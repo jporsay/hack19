@@ -24,11 +24,9 @@ class OccasionWidget extends StatelessWidget {
               ),
             ],
           ),
-          Text(occasion.title, style: TextStyle(fontSize: 30),),
           Row(
             children: <Widget>[
-              Padding(padding: EdgeInsets.symmetric(horizontal: 5),),
-              Text("Hosted by ${occasion.creator.username}"),
+              Text("Hosted by ${occasion.creator.username}", style: TextStyle(fontSize: 18),),
             ],
           ),
           Divider(),
