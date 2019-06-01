@@ -71,7 +71,6 @@ class OccasionRequirement {
   UserReference confirmedFulfiller;
 }
 
-
 class Tag {
   String id;
   String label;
