@@ -87,7 +87,9 @@ class RequirementWidget extends StatelessWidget {
           padding: EdgeInsets.only(left: 20),
           child: Column(
             children: <Widget>[
-              Text("Made possible thanks to: ${requirement.confirmedFulfiller.username}")
+              requirement.confirmedFulfiller != null
+              ? Text("Made possible thanks to: ${requirement.confirmedFulfiller.username}")
+              : Text("")
             ],
           ),
         )
