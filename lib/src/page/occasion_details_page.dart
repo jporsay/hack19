@@ -10,13 +10,13 @@ class OccasionDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              expandedHeight: 200.0,
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                expandedHeight: 200.0,
+                floating: false,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text(occasion.title,
                       style: TextStyle(
@@ -29,23 +29,20 @@ class OccasionDetailPage extends StatelessWidget {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [Colors.grey, Colors.white],
-                            stops: [0, 0.4]
-                        ).createShader(bounds);
+                            stops: [0, 0.4]).createShader(bounds);
                       },
                       child: Image(
                         image: NetworkImage(occasion.bannerPhoto),
                         fit: BoxFit.fill,
                         colorBlendMode: BlendMode.dstIn,
-                      )
-                  ),
+                      )),
+                ),
               ),
-            ),
-          ];
-        },
-        body: OccasionWidget(
-          occasion: occasion,
-        )
-      ),
+            ];
+          },
+          body: OccasionWidget(
+            occasion: occasion,
+          )),
     );
   }
 }

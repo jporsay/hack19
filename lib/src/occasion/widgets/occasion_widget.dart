@@ -54,7 +54,7 @@ class OccasionWidget extends StatelessWidget {
           Row(
             children: <Widget>[
               Padding(padding: EdgeInsets.symmetric(vertical: 15),),
-              Text("Hosted by ${occasion.creator.username}", style: TextStyle(fontSize: 18),),
+              Text("Hosted by ${occasion.creator.name}", style: TextStyle(fontSize: 18),),
             ],
           ),
           Divider(),
@@ -138,7 +138,7 @@ class RequirementWidget extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          "Made possible thanks to: ${requirement.confirmedFulfiller.username}",
+                          "Made possible thanks to: ${requirement.confirmedFulfiller.name}",
                           style: TextStyle(color: Colors.blueGrey),
                         ),
                       ],

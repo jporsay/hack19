@@ -7,12 +7,17 @@ class AuthenticationRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Stream<bool> isLoggedIn() {
-    return _auth.onAuthStateChanged.map((user) => !user.isAnonymous);
+    return _auth.onAuthStateChanged
+        .map((user) => user != null && !user.isAnonymous);
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 
   Stream<User> loggedUser() {
     return _auth.onAuthStateChanged.map((firebaseUser) {
-      if (firebaseUser.isAnonymous) {
+      if (firebaseUser != null && firebaseUser.isAnonymous) {
         return AnonymousUser();
       }
       return LoggedInUser.fromFirebaseUser(firebaseUser);
