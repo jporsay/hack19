@@ -22,15 +22,12 @@ class MyApp extends StatelessWidget {
         Provider<AuthenticationProvider>.value(value: AuthenticationProvider()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        navigatorObservers: <NavigatorObserver>[observer],
-        home: LoginPage(
-          message: "Sign in to continue using our app",
-        ),
-      ),
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          navigatorObservers: <NavigatorObserver>[observer],
+          home: HomePage()),
     );
   }
 }
