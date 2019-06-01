@@ -13,14 +13,15 @@ class LoggedInUser extends User {
   String username;
   String phone;
   Address address;
+  DocumentSnapshot snapshot;
 
-  LoggedInUser(this.id, this.email);
+  LoggedInUser(this.id, this.email, [this.snapshot]);
 
   factory LoggedInUser.fromFirebaseUser(FirebaseUser user) {
     return LoggedInUser(user.uid, user.email);
   }
   factory LoggedInUser.fromSnapshotDocument(DocumentSnapshot document) {
-    return LoggedInUser(document.documentID, document.data["email"]);
+    return LoggedInUser(document.documentID, document.data["email"], document);
   }
 }
 
@@ -43,9 +44,10 @@ class UserReference {
 
   factory UserReference.fromDynamic(dynamic data) {
     return UserReference(
-      data["userId"], data["name"], data["username"], data["email"],
+      data["userId"],
+      data["name"],
+      data["username"],
+      data["email"],
     );
   }
 }
-
-
