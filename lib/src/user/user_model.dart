@@ -15,6 +15,7 @@ class LoggedInUser extends User {
   Address address;
 
   LoggedInUser(this.id, this.email);
+
   factory LoggedInUser.fromFirebaseUser(FirebaseUser user) {
     return LoggedInUser(user.uid, user.email);
   }
@@ -40,7 +41,11 @@ class UserReference {
     return UserReference(user.id, user.name, user.username, user.email);
   }
 
-  factory UserReference.fromSnapshotDocument(LoggedInUser user) {
-    return UserReference(user.id, user.name, user.username, user.email);
+  factory UserReference.fromDynamic(dynamic data) {
+    return UserReference(
+      data["userId"], data["name"], data["username"], data["email"],
+    );
   }
 }
+
+

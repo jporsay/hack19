@@ -43,6 +43,9 @@ class Occasion extends Equatable {
   List<UserReference> confirmedAssistants = [];
   List<UserReference> assistantsWaitingList = [];
   OccasionStatus status = OccasionStatus.DRAFT;
+  String location;
+  String iconPhoto;
+  String bannerPhoto;
 
   Occasion({
     this.id,
@@ -53,29 +56,32 @@ class Occasion extends Equatable {
     this.occasionDate,
     this.requirementsDate,
     this.maxAssistantsCount,
-    this.status
+    this.status,
+    this.location
   });
 
   factory Occasion.fromSnapshotDocument(DocumentSnapshot document) {
     Occasion model = Occasion();
     model.id = document.documentID;
     model.title = document.data["title"];
-    model.creator = UserReference(
-        document.data["creator"]["userId"].toString(),
-        document.data["creator"]["name"].toString(),
-        document.data["creator"]["username"].toString(),
-        document.data["creator"]["email"].toString()
-    );
+    model.creator = UserReference.fromDynamic(document.data["creator"]);
     model.description = document.data["description"];
+    model.location = document.data["location"];
+    model.iconPhoto = document.data["iconPhoto"];
+    model.bannerPhoto = document.data["bannerPhoto"];
     model.maxAssistantsCount = document.data["maxAssistantsCount"];
     model.status = OccasionStatus.values.firstWhere(
         (e) => e.toString() == "OccasionStatus." + document.data["status"], orElse: () => null
     );
-    List<dynamic> tagsData = document.data["tags"];
+    List<dynamic> tagsData = document.data["tags"]?? [];
     model.tags = tagsData.map((data) => Tag(data["id"], data["label"])).toList();
     model.creationDate = document.data["creationDate"].toDate();
     model.requirementsDate = document.data["requirementsDate"].toDate();
     model.occasionDate = document.data["occasionDate"].toDate();
+    List<dynamic> requirementsData = document.data["requirements"]?? [];
+    model.requirements = requirementsData
+        .map((it) => OccasionRequirement.fromDynamic(it))
+        .toList();
     return model;
   }
 
@@ -93,10 +99,27 @@ class Occasion extends Equatable {
 }
 
 class OccasionRequirement {
-  String text;
+  String title;
   String description;
   List<UserReference> fulfillers = [];
   UserReference confirmedFulfiller;
+
+  OccasionRequirement(this.title, this.description);
+
+  factory OccasionRequirement.fromDynamic(dynamic data) {
+    OccasionRequirement model = OccasionRequirement(
+        data["title"], data["description"]
+    );
+    List<dynamic> fulfillersData = data["fulfillers"] ?? [];
+    model.fulfillers = fulfillersData
+        .map((it) => UserReference.fromDynamic(it))
+        .toList();
+    final confirmedFulfiller = data["confirmedFulfiller"];
+    if (confirmedFulfiller != null) {
+      model.confirmedFulfiller = UserReference.fromDynamic(confirmedFulfiller);
+    }
+    return model;
+  }
 }
 
 class Tag {

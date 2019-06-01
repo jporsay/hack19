@@ -82,7 +82,7 @@ class RequirementWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(requirement.text, style: TextStyle(fontSize: 20),),
+        Text(requirement.title, style: TextStyle(fontSize: 20),),
         Container(
           padding: EdgeInsets.only(left: 20),
           child: Column(
