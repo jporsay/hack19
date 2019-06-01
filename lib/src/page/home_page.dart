@@ -17,6 +17,10 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CreateEventPage(),
+                settings: RouteSettings(name: "Create event"),
+              ));
             },
           )
         ],
@@ -28,4 +32,24 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+class CreateEventPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return CreateEventPageState();
+  }
+}
+
+class CreateEventPageState extends State<CreateEventPage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Create event")
+      ),
+    );
+  }
+
 }
