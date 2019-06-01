@@ -66,7 +66,7 @@ class OccasionWidget extends StatelessWidget {
 }
 
 class RequirementWidget extends StatelessWidget {
-  OccasionRequirement requirement;
+  final OccasionRequirement requirement;
 
   RequirementWidget(this.requirement);
 
