@@ -9,14 +9,42 @@ class OccasionDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(occasion.title)),
-      body: Center(
-        child: SafeArea(
-          // TODO(jime): Fix this
-          child: OccasionWidget(
-            occasion: occasion,
-          ),
-        ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 200.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(occasion.title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      )),
+                  background: new ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [Colors.grey, Colors.white],
+                            stops: [0, 0.4]
+                        ).createShader(bounds);
+                      },
+                      child: Image(
+                        image: NetworkImage(occasion.bannerPhoto),
+                        fit: BoxFit.fill,
+                        colorBlendMode: BlendMode.dstIn,
+                      )
+                  ),
+              ),
+            ),
+          ];
+        },
+        body: OccasionWidget(
+          occasion: occasion,
+        )
       ),
     );
   }
