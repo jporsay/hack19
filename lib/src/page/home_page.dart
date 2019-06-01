@@ -13,6 +13,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Events near you"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+            },
+          )
+        ],
       ),
       backgroundColor: Color(0xFFd3d3d3),
       body: Padding(
