@@ -49,9 +49,7 @@ class Occasion extends Equatable {
   Occasion(this.id, this.title);
 
   factory Occasion.fromSnapshotDocument(DocumentSnapshot document) {
-    Occasion model = Occasion(
-        document.documentID, document.data["title"]
-    );
+    Occasion model = Occasion(document.documentID, document.data["title"]);
     return model;
   }
 }
@@ -61,7 +59,6 @@ class OccasionRequirement {
   List<UserReference> fulfillers = [];
   UserReference confirmedFulfiller;
 }
-
 
 class Tag {
   String id;

@@ -67,7 +67,7 @@ class OccasionWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),
         child: Row(
-          children: <Widget>[],
+          children: <Widget>[Text(occasion.title)],
         ),
       ),
     );
