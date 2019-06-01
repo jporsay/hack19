@@ -75,7 +75,10 @@ class _ErrorMessage extends StatelessWidget {
 class LoginPage extends StatefulWidget {
   final String message;
 
-  const LoginPage({Key key, this.message}) : super(key: key);
+  const LoginPage({
+    Key key,
+    this.message = "Please sign in to register to the event",
+  }) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -112,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                         Icons.arrow_back,
                         color: _whiteColor,
                       ),
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () => Navigator.of(context).pop(false),
                     )
                 ],
               ),
