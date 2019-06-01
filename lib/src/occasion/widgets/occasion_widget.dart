@@ -15,10 +15,17 @@ class OccasionWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(occasion.occasionDate.toString(), style: TextStyle(color: Colors.grey),),
+          Row(
+            children: <Widget>[
+              Icon(Icons.calendar_today, color: Colors.grey,),
+              Padding(padding: EdgeInsets.only(left: 5),),
+              Text(occasion.occasionDate.toString(), style: TextStyle(color: Colors.grey),),
+            ],
+          ),
           Text(occasion.title, style: TextStyle(fontSize: 30),),
           Row(
             children: <Widget>[
+              Padding(padding: EdgeInsets.symmetric(horizontal: 5),),
               Text("Hosted by ${occasion.creator.username}"),
             ],
           ),
